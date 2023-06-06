@@ -126,7 +126,7 @@ function App() {
       >
         <div style={{ marginRight: 200, marginBottom: 400 }}>
           <h2><BsBadgeHd /> Cách tìm kiếm videos từ ảnh</h2>
-          <p style={{ width: 300, marginLeft: 30, fontSize: 18, textAlign: 'center' }}>Kéo thả hoặc ấn "Chọn File" để tải file ảnh của bạn lên. Sau đó ấn "Tìm kiếm videos", hệ thống của chúng tôi sẽ tìm kiếm video có nội dung chứa hoặc gần giống nhất ảnh có trong CSDL và hiển thị ra kết quả.</p>
+          <p style={{ width: 300, marginLeft: 30, fontSize: 18, textAlign: 'center' }}>Kéo thả hoặc ấn "Chọn File" để tải file ảnh của bạn lên. Sau đó ấn "Tìm kiếm video", hệ thống của chúng tôi sẽ tìm kiếm video có nội dung chứa hoặc gần giống nhất ảnh có trong CSDL và hiển thị ra kết quả.</p>
         </div>
         <div className="container" >
 
@@ -174,7 +174,7 @@ function App() {
           {selectedImage && (
             <div>
               <div className="centered-content">
-                <button className={`search-button ${loading ? 'disabled' : ''}`} onClick={handleSearch} disabled={loading} style={{ cursor: loading ? 'no-drop' : 'pointer' }}>Tìm kiếm Videos</button>
+                <button className={`search-button ${loading ? 'disabled' : ''}`} onClick={handleSearch} disabled={loading} style={{ cursor: loading ? 'no-drop' : 'pointer' }}>Tìm kiếm Video</button>
               </div>
               {loading && <div className="loading">
                 <p style={{ marginTop: 100, fontSize: "18px" }}>Đang tìm kiếm...</p> <br />
@@ -209,7 +209,7 @@ function App() {
         </div>
         <div style={{ marginLeft: 200, marginBottom: 450 }}>
           <h2><BsClipboardCheck /> Điều kiện file ảnh đầu vào</h2>
-          <p style={{ width: 300, marginLeft: 30, fontSize: 18, textAlign: 'center' }}>Hệ thống chấp nhận các file ảnh đầu vào có đuôi /.png /.jpeg /.jpg /.git /.svg+xml</p>
+          <p style={{ width: 300, marginLeft: 30, fontSize: 18, textAlign: 'center' }}>Hệ thống chấp nhận các file ảnh đầu vào có đuôi tệp PNG, JPEG, JPG, GIF hoặc SVG.</p>
         </div>
       </div>
     </div >
