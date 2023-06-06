@@ -1,0 +1,14 @@
+@hostname = http://localhost:3003/search
+
+###
+POST {{hostname}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="file"; filename="ok1cfoaw.png"
+Content-Type: image/png
+
+< /home/harry/Pictures/Screenshot from 2023-06-05 16-15-13.png
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
