@@ -115,7 +115,7 @@ function App() {
           <img src={logo} alt='' className="logo-image" />
         </div>
         <div className='title'>
-          Nhóm 11
+          Nhóm 20
         </div>
       </header>
       <div className="title-content">Hệ thống tìm kiếm video có nội dung giống nhất hoặc chứa nội dung của ảnh đầu vào</div>
@@ -183,7 +183,8 @@ function App() {
             </div>
           )}
 
-          <div>
+{/* Phần gốc */}
+          {/* <div>
             <div className="search-results">
               {dataVideo && <h2>Kết quả tìm kiếm</h2>}
               <div className="video-grid">
@@ -203,6 +204,76 @@ function App() {
               </div>
             </div>
 
+          </div> */}
+
+
+{/* Phần sửa */}
+<div>
+          <div>
+            <div className="search-results-1">
+              {dataVideo && <h2>Kết quả tìm kiếm 1</h2>}
+              <div className="video-grid">
+                {dataVideo && [dataVideo].map((video, index) => (
+                  <div key={index} className="video-item" onClick={() => handleVideoClick(video)}>
+                    <video src={video.path} type="video/mp4" controls onLoadedMetadata={(e) => e.target.currentTime = video.time} width="300" height="180" />
+                  </div>
+                ))}
+                {selectedVideo && (
+                  <VideoGridModal video={selectedVideo} onClose={handleCloseModal} />
+                )}
+                {error && (
+                  <div className="search-results">
+                    <p className="no-search-results">{error}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+          </div>
+          
+          <div>
+            <div className="search-results-2">
+              {dataVideo && <h2>Kết quả tìm kiếm 2</h2>}
+              <div className="video-grid">
+                {dataVideo && [dataVideo].map((video, index) => (
+                  <div key={index} className="video-item" onClick={() => handleVideoClick(video)}>
+                    <video src={video.second_path} type="video/mp4" controls onLoadedMetadata={(e) => e.target.currentTime = video.second_time} width="300" height="180" />
+                  </div>
+                ))}
+                {selectedVideo && (
+                  <VideoGridModal video={selectedVideo} onClose={handleCloseModal} />
+                )}
+                {error && (
+                  <div className="search-results">
+                    <p className="no-search-results">{error}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+          </div>
+
+          <div>
+            <div className="search-results-3">
+              {dataVideo && <h2>Kết quả tìm kiếm 3</h2>}
+              <div className="video-grid">
+                {dataVideo && [dataVideo].map((video, index) => (
+                  <div key={index} className="video-item" onClick={() => handleVideoClick(video)}>
+                    <video src={video.third_path} type="video/mp4" controls onLoadedMetadata={(e) => e.target.currentTime = video.third_time} width="300" height="180" />
+                  </div>
+                ))}
+                {selectedVideo && (
+                  <VideoGridModal video={selectedVideo} onClose={handleCloseModal} />
+                )}
+                {error && (
+                  <div className="search-results">
+                    <p className="no-search-results">{error}</p>
+                  </div>
+                )}
+              </div>
+            </div>
+
+          </div>
           </div>
 
 

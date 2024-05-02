@@ -107,6 +107,16 @@ app.cli.add_command(create)
 app.cli.add_command(extract_featured_video)
 app.cli.add_command(save_kd_tree)
 
+# # Đọc vào file kdtree2 những frame không thuộc video đã tìm thấy
+# def save_another_kd_tree(x):
+#     frames = Frame.query.all()
+#     kdtree2 = []
+#     for frame in frames:
+#         if frame.video_id not in x:
+#             kdtree2.append(frame.feature_vector)
+#     kdtree2 = KDTree(kdtree2)
+#     with open("instance/kd-tree2.pk", "wb") as f:
+#         pickle.dump(kdtree2, f)
 
 @app.route("/search", methods=["POST"])
 @cross_origin()
@@ -133,15 +143,60 @@ def search():
         kdtree = pickle.load(file)
         file.close()
         frames = Frame.query.all()
-        distance, index = kdtree.query(feature_vector)
-        nearest_frame = frames[index]
+        distance, index = kdtree.query(feature_vector, k = 100)
+        a = []
+        nearest_frame = []
+        count = 0
+        for i in index:
+            if frames[i].video_id not in a:
+                nearest_frame.append(frames[i])
+                a.append(frames[i].video_id)
+                count += 1
+            if(count == 3):
+                break
+        # print(f"video1: {a[0]}")
+        # print(f"video2: {a[1]}")
+        # print(f"video3: {a[2]}")
+        
+        # second_nearest_frame = frames[index[1]]
+        # third_nearest_frame = frames[index[2]]
+
+        # # Tạo mảng chưa video_id đã lấy
+        # x = []
+        # x.append(nearest_frame.video_id)
+
+        # #Lấy ra frame của video thứ 2
+        # save_another_kd_tree(x)
+        # file = open("instance/kd-tree.pk", "rb")
+        # kdtree2 = pickle.load(file)
+        # file.close()
+        # distance2, index2 = kdtree2.query(feature_vector)
+        # second_nearest_frame = frames[index2]
+        # x.append(second_nearest_frame.video_id)
+        # print(f"index2: {index2}")
+
+        # #Lấy ra frame của video thứ 3
+        # save_another_kd_tree(x)
+        # file = open("instance/kd-tree.pk", "rb")
+        # kdtree3 = pickle.load(file)
+        # file.close()
+        # distance3, index3 = kdtree3.query(feature_vector)
+        # third_nearest_frame = frames[index3]
+        # x.append(third_nearest_frame.video_id)
+        # print(f"index3: {index3}")
 
         return jsonify(
             {
                 "error": False,
                 "data": {
-                    "path": f"{request.host_url}{nearest_frame.video.path}",
-                    "time": nearest_frame.time,
+                    "path": f"{request.host_url}{nearest_frame[0].video.path}",
+                    "time": nearest_frame[0].time,
+
+                    # truyền thêm dữ liệu của 2 video gần nhất
+                    "second_path": f"{request.host_url}{nearest_frame[1].video.path}",
+                    "second_time": nearest_frame[1].time,
+                    "third_path": f"{request.host_url}{nearest_frame[2].video.path}",
+                    "third_time": nearest_frame[2].time,
                 },
             }
         )
