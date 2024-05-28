@@ -143,7 +143,8 @@ def search():
         kdtree = pickle.load(file)
         file.close()
         frames = Frame.query.all()
-        distance, index = kdtree.query(feature_vector, k = 100)
+        quantity_fw = len(feature_vector)
+        distance, index = kdtree.query(feature_vector, k = quantity_fw)
         a = []
         nearest_frame = []
         count = 0
